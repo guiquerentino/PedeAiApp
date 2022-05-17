@@ -1,10 +1,9 @@
-import 'package:ja_chegou/index.dart';
-
 import '../auth/auth_util.dart';
 import '../esqueceu_senha_page/esqueceu_senha_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../tela_principal/tela_principal_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,6 +44,15 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(1),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          actions: [],
+          elevation: 0,
+        ),
+      ),
       backgroundColor: Colors.white,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -316,7 +324,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  TelaPrincipalPageWidget(),
+                                                  TelaPrincipalWidget(),
                                             ),
                                             (r) => false,
                                           );
@@ -439,7 +447,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EsqueceuSenhaPageWidget(),
+                                                      TelaPrincipalWidget(),
                                                 ),
                                                 (r) => false,
                                               );
@@ -856,7 +864,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Text(
-                                                  'As senhas não correspondem',
+                                                  'Passwords don\'t match!',
                                                 ),
                                               ),
                                             );
@@ -877,7 +885,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  EsqueceuSenhaPageWidget(),
+                                                  TelaPrincipalWidget(),
                                             ),
                                             (r) => false,
                                           );
@@ -958,7 +966,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      EsqueceuSenhaPageWidget(),
+                                                      TelaPrincipalWidget(),
                                                 ),
                                                 (r) => false,
                                               );

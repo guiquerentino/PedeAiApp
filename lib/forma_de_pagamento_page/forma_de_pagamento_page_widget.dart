@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../pagamento_confirmado_page/pagamento_confirmado_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,8 +49,8 @@ class _FormaDePagamentoPageWidgetState
             color: Color(0xFF0F1113),
             size: 30,
           ),
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            Navigator.pop(context);
           },
         ),
         title: Text(
@@ -125,7 +126,7 @@ class _FormaDePagamentoPageWidgetState
                                       onChanged: (newValue) => setState(() =>
                                           checkboxListTileValue1 = newValue),
                                       title: Text(
-                                        'Credit Card',
+                                        'Cartão de Crédito',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -155,7 +156,7 @@ class _FormaDePagamentoPageWidgetState
                               controller: textController,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Your Name',
+                                labelText: 'Seu Nome',
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0xFFE0E3E7),
@@ -420,10 +421,16 @@ class _FormaDePagamentoPageWidgetState
                         ),
                       if (checkboxListTileValue1 ?? true)
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PagamentoConfirmadoPageWidget(),
+                              ),
+                            );
                           },
-                          text: 'Pay Now',
+                          text: 'Pague agora',
                           options: FFButtonOptions(
                             width: 270,
                             height: 50,
