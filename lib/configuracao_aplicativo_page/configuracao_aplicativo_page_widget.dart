@@ -37,8 +37,8 @@ class _ConfiguracaoAplicativoPageWidgetState
             color: Color(0xFF090F13),
             size: 30,
           ),
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            Navigator.pop(context);
           },
         ),
         title: Text(

@@ -23,3 +23,5 @@ export 'edicao_conta_page/edicao_conta_page_widget.dart'
     show EdicaoContaPageWidget;
 export 'criacao_loja_page/criacao_loja_page_widget.dart'
     show CriacaoLojaPageWidget;
+export 'sucesso_criacao_loja_page/sucesso_criacao_loja_page_widget.dart'
+    show SucessoCriacaoLojaPageWidget;

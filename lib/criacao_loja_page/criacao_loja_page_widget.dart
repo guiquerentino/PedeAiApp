@@ -2,6 +2,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../sucesso_criacao_loja_page/sucesso_criacao_loja_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -325,7 +326,12 @@ class _CriacaoLojaPageWidgetState extends State<CriacaoLojaPageWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
             child: FFButtonWidget(
               onPressed: () async {
-                Navigator.pop(context);
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SucessoCriacaoLojaPageWidget(),
+                  ),
+                );
               },
               text: 'Enviar solicitação',
               options: FFButtonOptions(
