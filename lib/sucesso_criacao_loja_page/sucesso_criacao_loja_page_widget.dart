@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-class PagamentoConfirmadoPageWidget extends StatefulWidget {
-  const PagamentoConfirmadoPageWidget({Key key}) : super(key: key);
+class SucessoCriacaoLojaPageWidget extends StatefulWidget {
+  const SucessoCriacaoLojaPageWidget({Key key}) : super(key: key);
 
   @override
-  _PagamentoConfirmadoPageWidgetState createState() =>
-      _PagamentoConfirmadoPageWidgetState();
+  _SucessoCriacaoLojaPageWidgetState createState() =>
+      _SucessoCriacaoLojaPageWidgetState();
 }
 
-class _PagamentoConfirmadoPageWidgetState
-    extends State<PagamentoConfirmadoPageWidget> {
+class _SucessoCriacaoLojaPageWidgetState
+    extends State<SucessoCriacaoLojaPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -49,7 +49,7 @@ class _PagamentoConfirmadoPageWidgetState
                 ),
               ),
               Text(
-                'Sucesso!',
+                'Parabéns!',
                 style: FlutterFlowTheme.of(context).title2.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,
@@ -60,11 +60,12 @@ class _PagamentoConfirmadoPageWidgetState
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                 child: Text(
-                  'Compra realizada com sucesso',
+                  'Sua solicitação foi recebida  e logo\nvocê receberá um feedback no seu e-mail',
+                  textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).subtitle2.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w300,
                       ),
                 ),
@@ -83,9 +84,9 @@ class _PagamentoConfirmadoPageWidgetState
                       ),
                     );
                   },
-                  text: 'Voltar ao início',
+                  text: 'Voltar',
                   options: FFButtonOptions(
-                    width: 160,
+                    width: 130,
                     height: 50,
                     color: Colors.white,
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
