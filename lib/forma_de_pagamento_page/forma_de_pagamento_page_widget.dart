@@ -18,8 +18,8 @@ class FormaDePagamentoPageWidget extends StatefulWidget {
 
 class _FormaDePagamentoPageWidgetState
     extends State<FormaDePagamentoPageWidget> {
-  bool checkboxListTileValue1;
   TextEditingController textController;
+  bool checkboxListTileValue1;
   final creditCardFormKey = GlobalKey<FormState>();
   CreditCardModel creditCardInfo = emptyCreditCard();
   bool checkboxListTileValue2;
@@ -54,7 +54,7 @@ class _FormaDePagamentoPageWidgetState
           },
         ),
         title: Text(
-          'Subscription',
+          'Pagamento',
           style: FlutterFlowTheme.of(context).bodyText1.override(
                 fontFamily: 'Outfit',
                 color: Color(0xFF0F1113),

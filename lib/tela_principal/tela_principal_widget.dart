@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../historico_pedidos_page/historico_pedidos_page_widget.dart';
 import '../lista_carrinho_page/lista_carrinho_page_widget.dart';
 import '../menu_loja_comprador_page/menu_loja_comprador_page_widget.dart';
+import '../tela_de_login/tela_de_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,8 +19,8 @@ class TelaPrincipalWidget extends StatefulWidget {
 }
 
 class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController searchFieldController;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -39,17 +40,27 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-              child: Text(
-                'Lojas',
-                style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.black,
-                      fontSize: 24,
+              child: InkWell(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaDeLoginWidget(),
                     ),
+                  );
+                },
+                child: Text(
+                  'Lojas',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Lexend Deca',
+                        color: Colors.black,
+                        fontSize: 24,
+                      ),
+                ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(120, 0, 0, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(100, 0, 0, 0),
               child: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 30,

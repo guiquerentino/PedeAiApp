@@ -84,7 +84,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     suffixIcon: textController.text.isNotEmpty
                         ? InkWell(
                             onTap: () => setState(
-                              () => textController.clear(),
+                              () => textController?.clear(),
                             ),
                             child: Icon(
                               Icons.clear,

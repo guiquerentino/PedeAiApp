@@ -14,11 +14,11 @@ class CriacaoLojaPageWidget extends StatefulWidget {
 }
 
 class _CriacaoLojaPageWidgetState extends State<CriacaoLojaPageWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailAddressController1;
   TextEditingController passwordController;
   bool passwordVisibility;
   TextEditingController emailAddressController2;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

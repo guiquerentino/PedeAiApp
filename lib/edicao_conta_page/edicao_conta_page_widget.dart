@@ -13,11 +13,11 @@ class EdicaoContaPageWidget extends StatefulWidget {
 }
 
 class _EdicaoContaPageWidgetState extends State<EdicaoContaPageWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailAddressController1;
   TextEditingController yourNameController;
   TextEditingController emailAddressController2;
   TextEditingController emailAddressController3;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

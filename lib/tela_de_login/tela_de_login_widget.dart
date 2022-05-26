@@ -1,12 +1,11 @@
 import '../auth/auth_util.dart';
-import '../esqueceu_senha_page/esqueceu_senha_page_widget.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../confirmacao_codigo_email_page/confirmacao_codigo_email_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../tela_principal/tela_principal_widget.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TelaDeLoginWidget extends StatefulWidget {
@@ -17,7 +16,7 @@ class TelaDeLoginWidget extends StatefulWidget {
 }
 
 class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  ApiCallResponse tokenCode;
   TextEditingController confirmPasswordController;
   bool confirmPasswordVisibility;
   TextEditingController createEmailController;
@@ -26,6 +25,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
   TextEditingController loginEmailAddressController;
   TextEditingController loginPasswordController;
   bool loginPasswordVisibility;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -44,15 +44,6 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(1),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: Colors.white,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -350,198 +341,6 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                           ),
                                           borderRadius: 8,
                                         ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          await Navigator.push(
-                                            context,
-                                            PageTransition(
-                                              type: PageTransitionType
-                                                  .topToBottom,
-                                              duration:
-                                                  Duration(milliseconds: 300),
-                                              reverseDuration:
-                                                  Duration(milliseconds: 300),
-                                              child: EsqueceuSenhaPageWidget(),
-                                            ),
-                                          );
-                                        },
-                                        text: 'Esqueceu a senha?',
-                                        options: FFButtonOptions(
-                                          width: 200,
-                                          height: 30,
-                                          color: Color(0x00FFFFFF),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: Color(0xFF57636C),
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                          elevation: 0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius: 0,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 0, 0),
-                                      child: AutoSizeText(
-                                        'OU',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title3
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color: Color(0xFF0F1113),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 0, 16),
-                                      child: AutoSizeText(
-                                        'Use uma plataforma social para entrar',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color: Color(0xFF57636C),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24, 8, 24, 8),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          InkWell(
-                                            onTap: () async {
-                                              final user =
-                                                  await signInWithGoogle(
-                                                      context);
-                                              if (user == null) {
-                                                return;
-                                              }
-                                              await Navigator
-                                                  .pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      TelaPrincipalWidget(),
-                                                ),
-                                                (r) => false,
-                                              );
-                                            },
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFF0F1113),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 5,
-                                                    color: Color(0x3314181B),
-                                                    offset: Offset(0, 2),
-                                                  )
-                                                ],
-                                                shape: BoxShape.circle,
-                                              ),
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: FaIcon(
-                                                FontAwesomeIcons.google,
-                                                color: Colors.white,
-                                                size: 24,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF0F1113),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 5,
-                                                  color: Color(0x3314181B),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              shape: BoxShape.circle,
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.apple,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF0F1113),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 5,
-                                                  color: Color(0x3314181B),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              shape: BoxShape.circle,
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.facebookF,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF0F1113),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 5,
-                                                  color: Color(0x3314181B),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              shape: BoxShape.circle,
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: Icon(
-                                              Icons.phone_sharp,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ),
                                   ],
@@ -853,215 +652,117 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 20, 0, 0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          if (createPasswordController.text !=
-                                              confirmPasswordController.text) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  'Passwords don\'t match!',
-                                                ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 20, 0, 0),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.7,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiaryColor,
+                                                width: 2,
                                               ),
-                                            );
-                                            return;
-                                          }
-
-                                          final user =
-                                              await createAccountWithEmail(
-                                            context,
-                                            createEmailController.text,
-                                            createPasswordController.text,
-                                          );
-                                          if (user == null) {
-                                            return;
-                                          }
-
-                                          await Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TelaPrincipalWidget(),
                                             ),
-                                            (r) => false,
-                                          );
-                                        },
-                                        text: 'Criar conta',
-                                        options: FFButtonOptions(
-                                          width: 230,
-                                          height: 50,
-                                          color: Color(0xFF0F1113),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
+                                            child: InkWell(
+                                              onTap: () async {
+                                                if (createPasswordController
+                                                        ?.text !=
+                                                    confirmPasswordController
+                                                        ?.text) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Passwords don\'t match!',
+                                                      ),
+                                                    ),
+                                                  );
+                                                  return;
+                                                }
+
+                                                final user =
+                                                    await createAccountWithEmail(
+                                                  context,
+                                                  createEmailController.text,
+                                                  createPasswordController.text,
+                                                );
+                                                if (user == null) {
+                                                  return;
+                                                }
+
+                                                tokenCode =
+                                                    await TokenAPICall.call(
+                                                  email:
+                                                      FFAppState().emailUsuario,
+                                                );
+                                                setState(() =>
+                                                    FFAppState().tokenCode =
+                                                        getJsonField(
+                                                      (tokenCode?.jsonBody ??
+                                                          ''),
+                                                      r'''$''',
+                                                    ).toString());
+                                                await Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type: PageTransitionType
+                                                        .scale,
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    duration: Duration(
+                                                        milliseconds: 300),
+                                                    reverseDuration: Duration(
+                                                        milliseconds: 300),
+                                                    child:
+                                                        ConfirmacaoCodigoEmailPageWidget(),
                                                   ),
-                                          elevation: 3,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius: 8,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 16, 0, 0),
-                                      child: AutoSizeText(
-                                        'OU',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .title3
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color: Color(0xFF0F1113),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 8, 0, 16),
-                                      child: AutoSizeText(
-                                        'Criar a partir de uma plataforma social',
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color: Color(0xFF57636C),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24, 8, 24, 8),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          InkWell(
-                                            onTap: () async {
-                                              final user =
-                                                  await signInWithGoogle(
-                                                      context);
-                                              if (user == null) {
-                                                return;
-                                              }
-                                              await Navigator
-                                                  .pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      TelaPrincipalWidget(),
-                                                ),
-                                                (r) => false,
-                                              );
-                                            },
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFF0F1113),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 5,
-                                                    color: Color(0x3314181B),
-                                                    offset: Offset(0, 2),
-                                                  )
+                                                );
+
+                                                setState(() {});
+                                              },
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      'Continuar',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lexend Deca',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .tertiaryColor,
+                                                                fontSize: 20,
+                                                              ),
+                                                    ),
+                                                  ),
                                                 ],
-                                                shape: BoxShape.circle,
-                                              ),
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: FaIcon(
-                                                FontAwesomeIcons.google,
-                                                color: Colors.white,
-                                                size: 24,
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF0F1113),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 5,
-                                                  color: Color(0x3314181B),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              shape: BoxShape.circle,
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.apple,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF0F1113),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 5,
-                                                  color: Color(0x3314181B),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              shape: BoxShape.circle,
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.facebookF,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFF0F1113),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 5,
-                                                  color: Color(0x3314181B),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              shape: BoxShape.circle,
-                                            ),
-                                            alignment:
-                                                AlignmentDirectional(0, 0),
-                                            child: Icon(
-                                              Icons.phone_sharp,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

@@ -25,3 +25,7 @@ export 'criacao_loja_page/criacao_loja_page_widget.dart'
     show CriacaoLojaPageWidget;
 export 'sucesso_criacao_loja_page/sucesso_criacao_loja_page_widget.dart'
     show SucessoCriacaoLojaPageWidget;
+export 'confirmacao_codigo_email_page/confirmacao_codigo_email_page_widget.dart'
+    show ConfirmacaoCodigoEmailPageWidget;
+export 'erro_confirmacao_codigo_email_page/erro_confirmacao_codigo_email_page_widget.dart'
+    show ErroConfirmacaoCodigoEmailPageWidget;
