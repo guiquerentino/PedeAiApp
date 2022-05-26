@@ -18,8 +18,8 @@ class MenuLojaCompradorPageWidget extends StatefulWidget {
 
 class _MenuLojaCompradorPageWidgetState
     extends State<MenuLojaCompradorPageWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController textController;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -73,7 +73,7 @@ class _MenuLojaCompradorPageWidgetState
                 buttonSize: 48,
                 icon: Icon(
                   Icons.shopping_cart_outlined,
-                  color: Color(0xFF95A1AC),
+                  color: Colors.black,
                   size: 30,
                 ),
                 onPressed: () async {

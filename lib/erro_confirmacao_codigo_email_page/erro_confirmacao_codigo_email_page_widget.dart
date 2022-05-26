@@ -1,21 +1,24 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../tela_de_login/tela_de_login_widget.dart';
+import '../menu_loja_comprador_page/menu_loja_comprador_page_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EsqueceuSenhaPageWidget extends StatefulWidget {
-  const EsqueceuSenhaPageWidget({Key key}) : super(key: key);
+class ErroConfirmacaoCodigoEmailPageWidget extends StatefulWidget {
+  const ErroConfirmacaoCodigoEmailPageWidget({Key key}) : super(key: key);
 
   @override
-  _EsqueceuSenhaPageWidgetState createState() =>
-      _EsqueceuSenhaPageWidgetState();
+  _ErroConfirmacaoCodigoEmailPageWidgetState createState() =>
+      _ErroConfirmacaoCodigoEmailPageWidgetState();
 }
 
-class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
+class _ErroConfirmacaoCodigoEmailPageWidgetState
+    extends State<ErroConfirmacaoCodigoEmailPageWidget> {
   TextEditingController emailAddressController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -57,12 +60,7 @@ class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
                           size: 24,
                         ),
                         onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TelaDeLoginWidget(),
-                            ),
-                          );
+                          Navigator.pop(context);
                         },
                       ),
                     ),
@@ -84,7 +82,7 @@ class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
                 child: Text(
-                  'Esqueceu a senha?',
+                  'Confirmação de e-mail',
                   style: FlutterFlowTheme.of(context).title1.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF0F1113),
@@ -112,7 +110,7 @@ class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
                     child: Text(
-                      'Enviaremos um e-mail com um link para redefinir sua senha, por favor insira o e-mail associado com a sua conta abaixo.',
+                      'Nós enviaremos um código para o seu e-mail para confirmar o seu cadastro. Digite-o abaixo.',
                       style: FlutterFlowTheme.of(context).bodyText2.override(
                             fontFamily: 'Outfit',
                             color: Color(0xFF57636C),
@@ -145,14 +143,14 @@ class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
                 controller: emailAddressController,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Seu endereço de e-mail..',
+                  labelText: 'Código de verificação',
                   labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF57636C),
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                       ),
-                  hintText: 'Insira seu e-mail..',
+                  hintText: 'Digite o código.',
                   hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF57636C),
@@ -188,25 +186,33 @@ class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+            padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+            child: Text(
+              'Código de confirmação inválido!',
+              style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'Lexend Deca',
+                    color: Color(0xFFFF0000),
+                  ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
             child: FFButtonWidget(
               onPressed: () async {
-                if (emailAddressController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'Email required!',
-                      ),
+                if ((emailAddressController.text) == (FFAppState().tokenCode)) {
+                  final usersUpdateData = createUsersRecordData(
+                    contaVerificada: true,
+                  );
+                  await currentUserReference.update(usersUpdateData);
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MenuLojaCompradorPageWidget(),
                     ),
                   );
-                  return;
                 }
-                await resetPassword(
-                  email: emailAddressController.text,
-                  context: context,
-                );
               },
-              text: 'Enviar Link',
+              text: 'Verificar e-mail',
               options: FFButtonOptions(
                 width: 270,
                 height: 50,
