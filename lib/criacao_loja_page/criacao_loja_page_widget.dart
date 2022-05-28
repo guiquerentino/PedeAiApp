@@ -242,6 +242,7 @@ class _CriacaoLojaPageWidgetState extends State<CriacaoLojaPageWidget> {
                     onTap: () => setState(
                       () => passwordVisibility = !passwordVisibility,
                     ),
+                    focusNode: FocusNode(skipTraversal: true),
                     child: Icon(
                       passwordVisibility
                           ? Icons.visibility_outlined

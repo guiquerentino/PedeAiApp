@@ -1,11 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../conta_criada_com_sucesso_page/conta_criada_com_sucesso_page_widget.dart';
 import '../erro_confirmacao_codigo_email_page/erro_confirmacao_codigo_email_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../menu_loja_comprador_page/menu_loja_comprador_page_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -193,12 +193,13 @@ class _ConfirmacaoCodigoEmailPageWidgetState
                 if ((emailAddressController.text) == (FFAppState().tokenCode)) {
                   final usersUpdateData = createUsersRecordData(
                     contaVerificada: true,
+                    ehPrimeiraVez: true,
                   );
                   await currentUserReference.update(usersUpdateData);
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MenuLojaCompradorPageWidget(),
+                      builder: (context) => ContaCriadaComSucessoPageWidget(),
                     ),
                   );
                 } else {
