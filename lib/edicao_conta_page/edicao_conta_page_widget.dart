@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -22,10 +23,10 @@ class _EdicaoContaPageWidgetState extends State<EdicaoContaPageWidget> {
   @override
   void initState() {
     super.initState();
-    emailAddressController1 = TextEditingController();
-    yourNameController = TextEditingController();
-    emailAddressController2 = TextEditingController();
-    emailAddressController3 = TextEditingController();
+    emailAddressController1 = TextEditingController(text: currentUserEmail);
+    yourNameController = TextEditingController(text: '[display_name]');
+    emailAddressController2 = TextEditingController(text: currentUserEmail);
+    emailAddressController3 = TextEditingController(text: currentUserEmail);
   }
 
   @override
@@ -121,13 +122,14 @@ class _EdicaoContaPageWidgetState extends State<EdicaoContaPageWidget> {
                 controller: yourNameController,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Seu nome',
+                  labelText: 'Full Name',
                   labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                       ),
+                  hintText: 'Your full name...',
                   hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
@@ -166,13 +168,14 @@ class _EdicaoContaPageWidgetState extends State<EdicaoContaPageWidget> {
                 controller: emailAddressController1,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Endereço de e-mail',
+                  labelText: 'Email Address',
                   labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                       ),
+                  hintText: 'Your email..',
                   hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
@@ -211,13 +214,14 @@ class _EdicaoContaPageWidgetState extends State<EdicaoContaPageWidget> {
                 controller: emailAddressController2,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Telefone para contato',
+                  labelText: 'Email Address',
                   labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                       ),
+                  hintText: 'Your email..',
                   hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
@@ -256,13 +260,14 @@ class _EdicaoContaPageWidgetState extends State<EdicaoContaPageWidget> {
                 controller: emailAddressController3,
                 obscureText: false,
                 decoration: InputDecoration(
-                  labelText: 'Endereço',
+                  labelText: 'Email Address',
                   labelStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                       ),
+                  hintText: 'Your email..',
                   hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
                         fontFamily: 'Lexend Deca',
                         color: Color(0xFF95A1AC),

@@ -162,7 +162,14 @@ class _DetalhesProdutoPageWidgetState extends State<DetalhesProdutoPageWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                             child: FlutterFlowDropDown(
-                              options: ['Small', 'Medium', 'Large'].toList(),
+                              options: [
+                                'Small',
+                                'Medium',
+                                'Large',
+                                'Small',
+                                'Medium',
+                                'Large'
+                              ].toList(),
                               onChanged: (val) =>
                                   setState(() => dropDownValue = val),
                               width: 130,

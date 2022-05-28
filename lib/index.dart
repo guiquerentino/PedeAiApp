@@ -29,3 +29,9 @@ export 'confirmacao_codigo_email_page/confirmacao_codigo_email_page_widget.dart'
     show ConfirmacaoCodigoEmailPageWidget;
 export 'erro_confirmacao_codigo_email_page/erro_confirmacao_codigo_email_page_widget.dart'
     show ErroConfirmacaoCodigoEmailPageWidget;
+export 'conta_criada_com_sucesso_page/conta_criada_com_sucesso_page_widget.dart'
+    show ContaCriadaComSucessoPageWidget;
+export 'tela_de_login_erro/tela_de_login_erro_widget.dart'
+    show TelaDeLoginErroWidget;
+export 'informacoes_perfil_page/informacoes_perfil_page_widget.dart'
+    show InformacoesPerfilPageWidget;

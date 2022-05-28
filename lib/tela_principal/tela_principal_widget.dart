@@ -59,6 +59,31 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
                 ),
               ),
             ),
+            FFButtonWidget(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TelaDeLoginWidget(),
+                  ),
+                );
+              },
+              text: 'Button',
+              options: FFButtonOptions(
+                width: 130,
+                height: 40,
+                color: FlutterFlowTheme.of(context).primaryColor,
+                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.white,
+                    ),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: 12,
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(100, 0, 0, 0),
               child: FlutterFlowIconButton(
@@ -157,7 +182,8 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
                         controller: searchFieldController,
                         obscureText: false,
                         decoration: InputDecoration(
-                          hintText: 'Search for classes here...',
+                          labelText: 'Search for classes...',
+                          hintText: 'Search by name, location etc...',
                           hintStyle: FlutterFlowTheme.of(context).bodyText2,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(

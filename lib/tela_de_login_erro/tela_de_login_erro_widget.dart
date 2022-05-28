@@ -5,32 +5,30 @@ import '../confirmacao_codigo_email_page/confirmacao_codigo_email_page_widget.da
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../informacoes_perfil_page/informacoes_perfil_page_widget.dart';
-import '../tela_de_login_erro/tela_de_login_erro_widget.dart';
 import '../tela_principal/tela_principal_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TelaDeLoginWidget extends StatefulWidget {
-  const TelaDeLoginWidget({Key key}) : super(key: key);
+class TelaDeLoginErroWidget extends StatefulWidget {
+  const TelaDeLoginErroWidget({Key key}) : super(key: key);
 
   @override
-  _TelaDeLoginWidgetState createState() => _TelaDeLoginWidgetState();
+  _TelaDeLoginErroWidgetState createState() => _TelaDeLoginErroWidgetState();
 }
 
-class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
+class _TelaDeLoginErroWidgetState extends State<TelaDeLoginErroWidget> {
   ApiCallResponse tokenCode;
   TextEditingController confirmPasswordController;
   bool confirmPasswordVisibility;
   TextEditingController createEmailController;
   TextEditingController createPasswordController;
   bool createPasswordVisibility;
+  ApiCallResponse tokenCodeError;
   TextEditingController loginEmailAddressController;
   TextEditingController loginPasswordController;
   bool loginPasswordVisibility;
   bool contaVerificada;
-  bool ehPrimeiraVez;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -167,7 +165,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                                           fontWeight:
                                                               FontWeight.normal,
                                                         ),
-                                                hintText: 'Preencha sua senha',
+                                                hintText: 'Preencha seu e-mail',
                                                 hintStyle: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyText1
@@ -309,10 +307,62 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 0),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          tokenCodeError =
+                                              await TokenAPICall.call(
+                                            email: FFAppState().emailUsuario,
+                                          );
+                                          setState(() => FFAppState()
+                                                  .tokenCode = getJsonField(
+                                                (tokenCodeError?.jsonBody ??
+                                                    ''),
+                                                r'''$''',
+                                              ).toString());
+                                          await Navigator.push(
+                                            context,
+                                            PageTransition(
+                                              type: PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                              reverseDuration:
+                                                  Duration(milliseconds: 0),
+                                              child:
+                                                  ConfirmacaoCodigoEmailPageWidget(),
+                                            ),
+                                          );
+
+                                          setState(() {});
+                                        },
+                                        child: Text(
+                                          'Conta não verificada. Clique AQUI para verifica-lá',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color: Color(0xFFFF0000),
+                                                fontSize: 14,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 16, 0, 0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           var _shouldSetState = false;
+                                          contaVerificada =
+                                              await actions.ehContaVerificada(
+                                            loginEmailAddressController.text,
+                                          );
+                                          _shouldSetState = true;
+                                          if ((contaVerificada) != true) {
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          }
 
                                           final user = await signInWithEmail(
                                             context,
@@ -323,47 +373,6 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                             return;
                                           }
 
-                                          setState(() => FFAppState()
-                                                  .emailUsuario =
-                                              loginEmailAddressController.text);
-                                          contaVerificada =
-                                              await actions.ehContaVerificada(
-                                            loginEmailAddressController.text,
-                                          );
-                                          _shouldSetState = true;
-                                          if ((contaVerificada) != true) {
-                                            await Navigator.push(
-                                              context,
-                                              PageTransition(
-                                                type: PageTransitionType.fade,
-                                                duration:
-                                                    Duration(milliseconds: 0),
-                                                reverseDuration:
-                                                    Duration(milliseconds: 0),
-                                                child: TelaDeLoginErroWidget(),
-                                              ),
-                                            );
-                                            if (_shouldSetState)
-                                              setState(() {});
-                                            return;
-                                          }
-                                          ehPrimeiraVez =
-                                              await actions.ehPrimeiraVez(
-                                            loginEmailAddressController.text,
-                                          );
-                                          _shouldSetState = true;
-                                          if ((ehPrimeiraVez) == true) {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    InformacoesPerfilPageWidget(),
-                                              ),
-                                            );
-                                            if (_shouldSetState)
-                                              setState(() {});
-                                            return;
-                                          }
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -635,7 +644,7 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                               obscureText:
                                                   !confirmPasswordVisibility,
                                               decoration: InputDecoration(
-                                                labelText: 'Confirmar senha',
+                                                labelText: 'Confirmar Senha',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText2

@@ -1,10 +1,11 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../conta_criada_com_sucesso_page/conta_criada_com_sucesso_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../menu_loja_comprador_page/menu_loja_comprador_page_widget.dart';
+import '../tela_de_login/tela_de_login_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +61,12 @@ class _ErroConfirmacaoCodigoEmailPageWidgetState
                           size: 24,
                         ),
                         onPressed: () async {
-                          Navigator.pop(context);
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TelaDeLoginWidget(),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -207,7 +213,7 @@ class _ErroConfirmacaoCodigoEmailPageWidgetState
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MenuLojaCompradorPageWidget(),
+                      builder: (context) => ContaCriadaComSucessoPageWidget(),
                     ),
                   );
                 }
