@@ -1,9 +1,8 @@
-import '../editar_perfil_page/editar_perfil_page_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../lista_carrinho_page/lista_carrinho_page_widget.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -202,7 +201,8 @@ class _HistoricoPedidosPageWidgetState extends State<HistoricoPedidosPageWidget>
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => EditarPerfilPageWidget(),
+                      builder: (context) =>
+                          NavBarPage(initialPage: 'EditarPerfilPage'),
                     ),
                   );
                 },
@@ -221,7 +221,8 @@ class _HistoricoPedidosPageWidgetState extends State<HistoricoPedidosPageWidget>
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ListaCarrinhoPageWidget(),
+                      builder: (context) =>
+                          NavBarPage(initialPage: 'ListaCarrinhoPage'),
                     ),
                   );
                 },

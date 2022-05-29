@@ -5,7 +5,7 @@ import '../confirmacao_codigo_email_page/confirmacao_codigo_email_page_widget.da
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../tela_principal/tela_principal_widget.dart';
+import '../main.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -376,8 +376,8 @@ class _TelaDeLoginErroWidgetState extends State<TelaDeLoginErroWidget> {
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TelaPrincipalWidget(),
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'TelaPrincipal'),
                                             ),
                                           );
                                           if (_shouldSetState) setState(() {});

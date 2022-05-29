@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/users_record.dart';
 import 'schema/chats_record.dart';
 import 'schema/chat_messages_record.dart';
+import 'schema/lojas_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -17,6 +18,7 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/chats_record.dart';
 export 'schema/chat_messages_record.dart';
+export 'schema/lojas_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -138,6 +140,48 @@ Future<FFFirestorePage<ChatMessagesRecord>> queryChatMessagesRecordPage({
     queryCollectionPage(
       ChatMessagesRecord.collection,
       ChatMessagesRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query LojasRecords (as a Stream and as a Future).
+Stream<List<LojasRecord>> queryLojasRecord({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      LojasRecord.collection,
+      LojasRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<LojasRecord>> queryLojasRecordOnce({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      LojasRecord.collection,
+      LojasRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<LojasRecord>> queryLojasRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      LojasRecord.collection,
+      LojasRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

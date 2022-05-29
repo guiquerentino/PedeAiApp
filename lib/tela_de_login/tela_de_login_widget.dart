@@ -6,8 +6,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../informacoes_perfil_page/informacoes_perfil_page_widget.dart';
+import '../main.dart';
 import '../tela_de_login_erro/tela_de_login_erro_widget.dart';
-import '../tela_principal/tela_principal_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -367,8 +367,8 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TelaPrincipalWidget(),
+                                              builder: (context) => NavBarPage(
+                                                  initialPage: 'TelaPrincipal'),
                                             ),
                                           );
                                           if (_shouldSetState) setState(() {});

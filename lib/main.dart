@@ -8,6 +8,8 @@ import 'auth/auth_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'index.dart';
 
 void main() async {
@@ -89,8 +91,155 @@ class _MyAppState extends State<MyApp> {
               ),
             )
           : currentUser.loggedIn
-              ? TelaPrincipalWidget()
+              ? NavBarPage()
               : TelaDeLoginWidget(),
+    );
+  }
+}
+
+class NavBarPage extends StatefulWidget {
+  NavBarPage({Key key, this.initialPage}) : super(key: key);
+
+  final String initialPage;
+
+  @override
+  _NavBarPageState createState() => _NavBarPageState();
+}
+
+/// This is the private State class that goes with NavBarPage.
+class _NavBarPageState extends State<NavBarPage> {
+  String _currentPage = 'TelaPrincipal';
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPage = widget.initialPage ?? _currentPage;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tabs = {
+      'TelaPrincipal': TelaPrincipalWidget(),
+      'ListaCarrinhoPage': ListaCarrinhoPageWidget(),
+      'HistoricoPedidosPage': HistoricoPedidosPageWidget(),
+      'EditarPerfilPage': EditarPerfilPageWidget(),
+    };
+    final currentIndex = tabs.keys.toList().indexOf(_currentPage);
+    return Scaffold(
+      body: tabs[_currentPage],
+      extendBody: true,
+      bottomNavigationBar: FloatingNavbar(
+        currentIndex: currentIndex,
+        onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
+        backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+        selectedItemColor: FlutterFlowTheme.of(context).dark900,
+        unselectedItemColor: Color(0x98292222),
+        selectedBackgroundColor: Color(0x00000000),
+        borderRadius: 8,
+        itemBorderRadius: 8,
+        margin: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        width: MediaQuery.of(context).size.width * 1,
+        elevation: 20,
+        items: [
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  currentIndex == 0 ? Icons.home : Icons.home,
+                  color: currentIndex == 0
+                      ? FlutterFlowTheme.of(context).dark900
+                      : Color(0x98292222),
+                  size: 24,
+                ),
+                Text(
+                  'Home',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 0
+                        ? FlutterFlowTheme.of(context).dark900
+                        : Color(0x98292222),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.shopping_cart,
+                  color: currentIndex == 1
+                      ? FlutterFlowTheme.of(context).dark900
+                      : Color(0x98292222),
+                  size: 24,
+                ),
+                Text(
+                  'Carrinho',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 1
+                        ? FlutterFlowTheme.of(context).dark900
+                        : Color(0x98292222),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.assignment_outlined,
+                  color: currentIndex == 2
+                      ? FlutterFlowTheme.of(context).dark900
+                      : Color(0x98292222),
+                  size: 24,
+                ),
+                Text(
+                  'Pedidos',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 2
+                        ? FlutterFlowTheme.of(context).dark900
+                        : Color(0x98292222),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.person,
+                  color: currentIndex == 3
+                      ? FlutterFlowTheme.of(context).dark900
+                      : Color(0x98292222),
+                  size: 24,
+                ),
+                Text(
+                  'Perfil',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 3
+                        ? FlutterFlowTheme.of(context).dark900
+                        : Color(0x98292222),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
