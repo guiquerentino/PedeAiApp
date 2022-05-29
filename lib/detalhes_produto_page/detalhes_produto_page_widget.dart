@@ -4,7 +4,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../lista_carrinho_page/lista_carrinho_page_widget.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -64,7 +64,8 @@ class _DetalhesProdutoPageWidgetState extends State<DetalhesProdutoPageWidget> {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ListaCarrinhoPageWidget(),
+                      builder: (context) =>
+                          NavBarPage(initialPage: 'ListaCarrinhoPage'),
                     ),
                   );
                 },
@@ -267,7 +268,8 @@ class _DetalhesProdutoPageWidgetState extends State<DetalhesProdutoPageWidget> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ListaCarrinhoPageWidget(),
+                  builder: (context) =>
+                      NavBarPage(initialPage: 'ListaCarrinhoPage'),
                 ),
               );
             },
@@ -297,7 +299,8 @@ class _DetalhesProdutoPageWidgetState extends State<DetalhesProdutoPageWidget> {
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ListaCarrinhoPageWidget(),
+                        builder: (context) =>
+                            NavBarPage(initialPage: 'ListaCarrinhoPage'),
                       ),
                     );
                   },

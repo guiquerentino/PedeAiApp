@@ -1,9 +1,11 @@
+import '../auth/auth_util.dart';
 import '../configuracao_aplicativo_page/configuracao_aplicativo_page_widget.dart';
 import '../edicao_conta_page/edicao_conta_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../historico_pedidos_page/historico_pedidos_page_widget.dart';
+import '../main.dart';
+import '../tela_de_login/tela_de_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -212,7 +214,7 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                             child: Text(
-                              'Olá, nome do usuário!',
+                              'Olá,',
                               style:
                                   FlutterFlowTheme.of(context).title1.override(
                                         fontFamily: 'Lexend Deca',
@@ -220,6 +222,20 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                       ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                            child: AuthUserStreamWidget(
+                              child: Text(
+                                currentUserDisplayName,
+                                style: FlutterFlowTheme.of(context)
+                                    .title1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
                             ),
                           ),
                         ],
@@ -231,7 +247,7 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                             child: Text(
-                              'email do usuário',
+                              currentUserEmail,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -279,7 +295,8 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HistoricoPedidosPageWidget(),
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'HistoricoPedidosPage'),
                           ),
                         );
                       },
@@ -530,38 +547,57 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 20),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                    child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      text: 'Desconectar',
-                      options: FFButtonOptions(
-                        width: 110,
-                        height: 40,
-                        color: Colors.black,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyText2.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: FlutterFlowTheme.of(context).gray200,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                        elevation: 3,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
+              child: InkWell(
+                onTap: () async {
+                  await signOut();
+                  await Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaDeLoginWidget(),
+                    ),
+                    (r) => false,
+                  );
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await signOut();
+                          await Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TelaDeLoginWidget(),
+                            ),
+                            (r) => false,
+                          );
+                        },
+                        text: 'Desconectar',
+                        options: FFButtonOptions(
+                          width: 110,
+                          height: 40,
+                          color: Colors.black,
+                          textStyle:
+                              FlutterFlowTheme.of(context).bodyText2.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: FlutterFlowTheme.of(context).gray200,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                          elevation: 3,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: 8,
                         ),
-                        borderRadius: 8,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
