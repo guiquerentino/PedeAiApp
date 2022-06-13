@@ -16,11 +16,11 @@ abstract class LojasRecord implements Built<LojasRecord, LojasRecordBuilder> {
   String get tipoLoja;
 
   @nullable
-  @BuiltValueField(wireName: 'IdVendedor')
-  String get idVendedor;
+  String get fotoLoja;
 
   @nullable
-  String get fotoLoja;
+  @BuiltValueField(wireName: 'IdLoja')
+  String get idLoja;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -29,8 +29,8 @@ abstract class LojasRecord implements Built<LojasRecord, LojasRecordBuilder> {
   static void _initializeBuilder(LojasRecordBuilder builder) => builder
     ..nomeLoja = ''
     ..tipoLoja = ''
-    ..idVendedor = ''
-    ..fotoLoja = '';
+    ..fotoLoja = ''
+    ..idLoja = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('lojas');
@@ -56,13 +56,13 @@ abstract class LojasRecord implements Built<LojasRecord, LojasRecordBuilder> {
 Map<String, dynamic> createLojasRecordData({
   String nomeLoja,
   String tipoLoja,
-  String idVendedor,
   String fotoLoja,
+  String idLoja,
 }) =>
     serializers.toFirestore(
         LojasRecord.serializer,
         LojasRecord((l) => l
           ..nomeLoja = nomeLoja
           ..tipoLoja = tipoLoja
-          ..idVendedor = idVendedor
-          ..fotoLoja = fotoLoja));
+          ..fotoLoja = fotoLoja
+          ..idLoja = idLoja));

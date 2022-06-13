@@ -1,7 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../conta_criada_com_sucesso_page/conta_criada_com_sucesso_page_widget.dart';
-import '../erro_confirmacao_codigo_email_page/erro_confirmacao_codigo_email_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -186,6 +185,17 @@ class _ConfirmacaoCodigoEmailPageWidgetState
               ),
             ),
           ),
+          if ((emailAddressController.text) != (FFAppState().tokenCode))
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+              child: Text(
+                'Código de confirmação inválido!',
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Color(0xFFFF0000),
+                    ),
+              ),
+            ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
             child: FFButtonWidget(
@@ -198,20 +208,15 @@ class _ConfirmacaoCodigoEmailPageWidgetState
                   await currentUserReference.update(usersUpdateData);
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => ContaCriadaComSucessoPageWidget(),
-                    ),
-                  );
-                } else {
-                  await Navigator.push(
-                    context,
                     PageTransition(
                       type: PageTransitionType.fade,
                       duration: Duration(milliseconds: 0),
                       reverseDuration: Duration(milliseconds: 0),
-                      child: ErroConfirmacaoCodigoEmailPageWidget(),
+                      child: ContaCriadaComSucessoPageWidget(),
                     ),
                   );
+                } else {
+                  return;
                 }
               },
               text: 'Verificar e-mail',

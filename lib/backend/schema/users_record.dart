@@ -57,6 +57,9 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   bool get ehPrimeiraVez;
 
   @nullable
+  String get idCliente;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -73,7 +76,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..enderecoCliente = ''
     ..numeroCasaCliente = ''
     ..cepCliente = ''
-    ..ehPrimeiraVez = false;
+    ..ehPrimeiraVez = false
+    ..idCliente = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -111,6 +115,7 @@ Map<String, dynamic> createUsersRecordData({
   String numeroCasaCliente,
   String cepCliente,
   bool ehPrimeiraVez,
+  String idCliente,
 }) =>
     serializers.toFirestore(
         UsersRecord.serializer,
@@ -128,4 +133,5 @@ Map<String, dynamic> createUsersRecordData({
           ..enderecoCliente = enderecoCliente
           ..numeroCasaCliente = numeroCasaCliente
           ..cepCliente = cepCliente
-          ..ehPrimeiraVez = ehPrimeiraVez));
+          ..ehPrimeiraVez = ehPrimeiraVez
+          ..idCliente = idCliente));

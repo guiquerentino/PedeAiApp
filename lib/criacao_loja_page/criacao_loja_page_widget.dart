@@ -329,8 +329,11 @@ class _CriacaoLojaPageWidgetState extends State<CriacaoLojaPageWidget> {
               onPressed: () async {
                 await Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => SucessoCriacaoLojaPageWidget(),
+                  PageTransition(
+                    type: PageTransitionType.fade,
+                    duration: Duration(milliseconds: 0),
+                    reverseDuration: Duration(milliseconds: 0),
+                    child: SucessoCriacaoLojaPageWidget(),
                   ),
                 );
               },

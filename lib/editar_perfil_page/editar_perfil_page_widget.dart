@@ -158,50 +158,6 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                                     ),
                                   ),
                                 ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 0, 0, 0),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Icon(
-                                              Icons.arrow_back,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .gray200,
-                                              size: 35,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15, 0, 0, 0),
-                                          child: Text(
-                                            'Voltar',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: Color(0xFFF7F7F7),
-                                                  fontSize: 18,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                           ),
@@ -219,7 +175,7 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                                   FlutterFlowTheme.of(context).title1.override(
                                         fontFamily: 'Lexend Deca',
                                         color: Colors.white,
-                                        fontSize: 24,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
                             ),
@@ -233,6 +189,7 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                                     .title1
                                     .override(
                                       fontFamily: 'Lexend Deca',
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
@@ -294,8 +251,11 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                       onTap: () async {
                         await Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) =>
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                            reverseDuration: Duration(milliseconds: 0),
+                            child:
                                 NavBarPage(initialPage: 'HistoricoPedidosPage'),
                           ),
                         );
@@ -372,9 +332,11 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                         onTap: () async {
                           await Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ConfiguracaoAplicativoPageWidget(),
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                              reverseDuration: Duration(milliseconds: 0),
+                              child: ConfiguracaoAplicativoPageWidget(),
                             ),
                           );
                         },
@@ -428,8 +390,11 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                       onTap: () async {
                         await Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => EdicaoContaPageWidget(),
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                            reverseDuration: Duration(milliseconds: 0),
+                            child: EdicaoContaPageWidget(),
                           ),
                         );
                       },
@@ -487,62 +452,6 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        border: Border.all(
-                          color: Color(0xFFF1F4F8),
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                            child: Icon(
-                              Icons.text_snippet,
-                              color: Colors.black,
-                              size: 24,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                            child: Text(
-                              'Criação de Loja',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF090F13),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(0.9, 0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Color(0xFF95A1AC),
-                                size: 18,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
             Padding(
@@ -552,8 +461,11 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                   await signOut();
                   await Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => TelaDeLoginWidget(),
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: Duration(milliseconds: 0),
+                      reverseDuration: Duration(milliseconds: 0),
+                      child: TelaDeLoginWidget(),
                     ),
                     (r) => false,
                   );
@@ -569,8 +481,11 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                           await signOut();
                           await Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => TelaDeLoginWidget(),
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                              reverseDuration: Duration(milliseconds: 0),
+                              child: TelaDeLoginWidget(),
                             ),
                             (r) => false,
                           );

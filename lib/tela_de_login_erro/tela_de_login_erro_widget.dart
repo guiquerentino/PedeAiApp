@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -375,8 +376,13 @@ class _TelaDeLoginErroWidgetState extends State<TelaDeLoginErroWidget> {
 
                                           await Navigator.push(
                                             context,
-                                            MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
+                                            PageTransition(
+                                              type: PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                              reverseDuration:
+                                                  Duration(milliseconds: 0),
+                                              child: NavBarPage(
                                                   initialPage: 'TelaPrincipal'),
                                             ),
                                           );
@@ -780,6 +786,10 @@ class _TelaDeLoginErroWidgetState extends State<TelaDeLoginErroWidget> {
                                                 final usersCreateData =
                                                     createUsersRecordData(
                                                   contaVerificada: false,
+                                                  idCliente: random_data
+                                                      .randomInteger(0, 99999)
+                                                      .toString(),
+                                                  ehPrimeiraVez: true,
                                                 );
                                                 await UsersRecord.collection
                                                     .doc(user.uid)
