@@ -9,6 +9,7 @@ import '../informacoes_perfil_page/informacoes_perfil_page_widget.dart';
 import '../main.dart';
 import '../tela_de_login_erro/tela_de_login_erro_widget.dart';
 import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -355,8 +356,13 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                           if ((ehPrimeiraVez) == true) {
                                             await Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
+                                              PageTransition(
+                                                type: PageTransitionType.fade,
+                                                duration:
+                                                    Duration(milliseconds: 0),
+                                                reverseDuration:
+                                                    Duration(milliseconds: 0),
+                                                child:
                                                     InformacoesPerfilPageWidget(),
                                               ),
                                             );
@@ -366,8 +372,13 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                           }
                                           await Navigator.push(
                                             context,
-                                            MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
+                                            PageTransition(
+                                              type: PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                              reverseDuration:
+                                                  Duration(milliseconds: 0),
+                                              child: NavBarPage(
                                                   initialPage: 'TelaPrincipal'),
                                             ),
                                           );
@@ -771,6 +782,10 @@ class _TelaDeLoginWidgetState extends State<TelaDeLoginWidget> {
                                                 final usersCreateData =
                                                     createUsersRecordData(
                                                   contaVerificada: false,
+                                                  idCliente: random_data
+                                                      .randomInteger(0, 99999)
+                                                      .toString(),
+                                                  ehPrimeiraVez: true,
                                                 );
                                                 await UsersRecord.collection
                                                     .doc(user.uid)

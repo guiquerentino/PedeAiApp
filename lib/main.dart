@@ -8,6 +8,7 @@ import 'auth/auth_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'index.dart';
@@ -120,8 +121,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'TelaPrincipal': TelaPrincipalWidget(),
-      'ListaCarrinhoPage': ListaCarrinhoPageWidget(),
       'HistoricoPedidosPage': HistoricoPedidosPageWidget(),
+      'carrinho': CarrinhoWidget(),
       'EditarPerfilPage': EditarPerfilPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -131,10 +132,10 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: FloatingNavbar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
-        backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+        backgroundColor: Colors.white,
         selectedItemColor: FlutterFlowTheme.of(context).dark900,
-        unselectedItemColor: Color(0x98292222),
-        selectedBackgroundColor: Color(0x00000000),
+        unselectedItemColor: FlutterFlowTheme.of(context).dark900,
+        selectedBackgroundColor: Colors.white,
         borderRadius: 8,
         itemBorderRadius: 8,
         margin: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -147,11 +148,11 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  currentIndex == 0 ? Icons.home : Icons.home,
+                  currentIndex == 0 ? Icons.home_outlined : Icons.home_outlined,
                   color: currentIndex == 0
                       ? FlutterFlowTheme.of(context).dark900
-                      : Color(0x98292222),
-                  size: 24,
+                      : FlutterFlowTheme.of(context).dark900,
+                  size: 26,
                 ),
                 Text(
                   'Home',
@@ -159,31 +160,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   style: TextStyle(
                     color: currentIndex == 0
                         ? FlutterFlowTheme.of(context).dark900
-                        : Color(0x98292222),
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color: currentIndex == 1
-                      ? FlutterFlowTheme.of(context).dark900
-                      : Color(0x98292222),
-                  size: 24,
-                ),
-                Text(
-                  'Carrinho',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 1
-                        ? FlutterFlowTheme.of(context).dark900
-                        : Color(0x98292222),
+                        : FlutterFlowTheme.of(context).dark900,
                     fontSize: 11.0,
                   ),
                 ),
@@ -196,18 +173,18 @@ class _NavBarPageState extends State<NavBarPage> {
               children: [
                 Icon(
                   Icons.assignment_outlined,
-                  color: currentIndex == 2
+                  color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).dark900
-                      : Color(0x98292222),
+                      : FlutterFlowTheme.of(context).dark900,
                   size: 24,
                 ),
                 Text(
                   'Pedidos',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: currentIndex == 2
+                    color: currentIndex == 1
                         ? FlutterFlowTheme.of(context).dark900
-                        : Color(0x98292222),
+                        : FlutterFlowTheme.of(context).dark900,
                     fontSize: 11.0,
                   ),
                 ),
@@ -219,10 +196,34 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.person,
+                  Icons.shopping_cart_outlined,
+                  color: currentIndex == 2
+                      ? FlutterFlowTheme.of(context).dark900
+                      : FlutterFlowTheme.of(context).dark900,
+                  size: 24,
+                ),
+                Text(
+                  'Carrinho',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 2
+                        ? FlutterFlowTheme.of(context).dark900
+                        : FlutterFlowTheme.of(context).dark900,
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.user,
                   color: currentIndex == 3
                       ? FlutterFlowTheme.of(context).dark900
-                      : Color(0x98292222),
+                      : FlutterFlowTheme.of(context).dark900,
                   size: 24,
                 ),
                 Text(
@@ -231,7 +232,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   style: TextStyle(
                     color: currentIndex == 3
                         ? FlutterFlowTheme.of(context).dark900
-                        : Color(0x98292222),
+                        : FlutterFlowTheme.of(context).dark900,
                     fontSize: 11.0,
                   ),
                 ),

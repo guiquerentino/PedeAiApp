@@ -59,8 +59,11 @@ class _EsqueceuSenhaPageWidgetState extends State<EsqueceuSenhaPageWidget> {
                         onPressed: () async {
                           await Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => TelaDeLoginWidget(),
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                              reverseDuration: Duration(milliseconds: 0),
+                              child: TelaDeLoginWidget(),
                             ),
                           );
                         },

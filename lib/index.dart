@@ -9,8 +9,6 @@ export 'detalhes_produto_page/detalhes_produto_page_widget.dart'
     show DetalhesProdutoPageWidget;
 export 'forma_de_pagamento_page/forma_de_pagamento_page_widget.dart'
     show FormaDePagamentoPageWidget;
-export 'lista_carrinho_page/lista_carrinho_page_widget.dart'
-    show ListaCarrinhoPageWidget;
 export 'pagamento_confirmado_page/pagamento_confirmado_page_widget.dart'
     show PagamentoConfirmadoPageWidget;
 export 'historico_pedidos_page/historico_pedidos_page_widget.dart'
@@ -27,11 +25,10 @@ export 'sucesso_criacao_loja_page/sucesso_criacao_loja_page_widget.dart'
     show SucessoCriacaoLojaPageWidget;
 export 'confirmacao_codigo_email_page/confirmacao_codigo_email_page_widget.dart'
     show ConfirmacaoCodigoEmailPageWidget;
-export 'erro_confirmacao_codigo_email_page/erro_confirmacao_codigo_email_page_widget.dart'
-    show ErroConfirmacaoCodigoEmailPageWidget;
 export 'conta_criada_com_sucesso_page/conta_criada_com_sucesso_page_widget.dart'
     show ContaCriadaComSucessoPageWidget;
 export 'tela_de_login_erro/tela_de_login_erro_widget.dart'
     show TelaDeLoginErroWidget;
 export 'informacoes_perfil_page/informacoes_perfil_page_widget.dart'
     show InformacoesPerfilPageWidget;
+export 'carrinho/carrinho_widget.dart' show CarrinhoWidget;

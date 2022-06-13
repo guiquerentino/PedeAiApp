@@ -4,7 +4,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../menu_loja_comprador_page/menu_loja_comprador_page_widget.dart';
-import '../tela_de_login/tela_de_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,23 +39,13 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-              child: InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TelaDeLoginWidget(),
+              child: Text(
+                'Olá, ',
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Colors.black,
+                      fontSize: 18,
                     ),
-                  );
-                },
-                child: Text(
-                  'Olá, ',
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Lexend Deca',
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
-                ),
               ),
             ),
             Align(
@@ -104,73 +93,75 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
                           )
                         ],
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
+                      child: Stack(
                         children: [
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 4, 4, 0),
-                              child: TextFormField(
-                                controller: searchFieldController,
-                                onFieldSubmitted: (_) async {
-                                  await queryLojasRecordOnce()
-                                      .then(
-                                        (records) => simpleSearchResults =
-                                            TextSearch(
-                                          records
-                                              .map(
-                                                (record) => TextSearchItem(
-                                                    record, [record.nomeLoja]),
-                                              )
-                                              .toList(),
-                                        )
-                                                .search(
-                                                    searchFieldController.text)
-                                                .map((r) => r.object)
-                                                .toList(),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 0),
+                            child: TextFormField(
+                              controller: searchFieldController,
+                              onFieldSubmitted: (_) async {
+                                await queryLojasRecordOnce()
+                                    .then(
+                                      (records) => simpleSearchResults =
+                                          TextSearch(
+                                        records
+                                            .map(
+                                              (record) => TextSearchItem(
+                                                  record, [record.nomeLoja]),
+                                            )
+                                            .toList(),
                                       )
-                                      .onError(
-                                          (_, __) => simpleSearchResults = [])
-                                      .whenComplete(() => setState(() {}));
-                                },
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Procurar por lojas',
-                                  hintText: 'Digite o nome de alguma loja',
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
+                                              .search(
+                                                  searchFieldController.text)
+                                              .map((r) => r.object)
+                                              .toList(),
+                                    )
+                                    .onError(
+                                        (_, __) => simpleSearchResults = [])
+                                    .whenComplete(() => setState(() {}));
+
+                                setState(() =>
+                                    FFAppState().mostrarListaCompleta = false);
+                                setState(() => FFAppState()
+                                    .mostrarFiltroCategoria = false);
+                                setState(() =>
+                                    FFAppState().mostrarListaPesquisa = true);
+                              },
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Procurar por lojas',
+                                hintText: 'Digite o nome de alguma loja',
+                                hintStyle:
+                                    FlutterFlowTheme.of(context).bodyText2,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 1,
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  suffixIcon: Icon(
-                                    Icons.search,
-                                    color:
-                                        FlutterFlowTheme.of(context).grayDark,
-                                    size: 22,
-                                  ),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color:
-                                          FlutterFlowTheme.of(context).grayIcon,
-                                    ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                suffixIcon: Icon(
+                                  Icons.search,
+                                  color: FlutterFlowTheme.of(context).grayDark,
+                                  size: 22,
+                                ),
                               ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color:
+                                        FlutterFlowTheme.of(context).grayIcon,
+                                  ),
                             ),
                           ),
                         ],
@@ -201,281 +192,345 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 8, 0, 8),
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                      child: InkWell(
+                        onTap: () async {
+                          setState(() =>
+                              FFAppState().tipoFiltroPesquisa = 'papelaria');
+                          setState(
+                              () => FFAppState().mostrarFiltroCategoria = true);
+                          setState(
+                              () => FFAppState().mostrarListaCompleta = false);
+                          setState(
+                              () => FFAppState().mostrarListaPesquisa = false);
+                        },
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  shape: BoxShape.circle,
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.store,
+                                    color:
+                                        FlutterFlowTheme.of(context).black600,
+                                  ),
                                 ),
-                                child: Icon(
-                                  Icons.store,
-                                  color: FlutterFlowTheme.of(context).black600,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 8, 0, 0),
+                                  child: Text(
+                                    'Papelarias',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                          fontSize: 14,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                                child: Text(
-                                  'Papelarias',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .black600,
-                                        fontSize: 14,
-                                      ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                      child: InkWell(
+                        onTap: () async {
+                          setState(
+                              () => FFAppState().tipoFiltroPesquisa = 'roupas');
+                          setState(
+                              () => FFAppState().mostrarFiltroCategoria = true);
+                          setState(
+                              () => FFAppState().mostrarListaCompleta = false);
+                          setState(
+                              () => FFAppState().mostrarListaPesquisa = false);
+                        },
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      7, 8, 0, 0),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.tshirt,
-                                    color: FlutterFlowTheme.of(context).dark900,
-                                    size: 27,
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        7, 8, 0, 0),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.tshirt,
+                                      color:
+                                          FlutterFlowTheme.of(context).dark900,
+                                      size: 27,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                                child: Text(
-                                  'Roupas',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .black600,
-                                        fontSize: 14,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  Icons.breakfast_dining,
-                                  color: FlutterFlowTheme.of(context).black600,
-                                  size: 32,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                                child: Text(
-                                  'Padarias',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .black600,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Padding(
+                                Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      9, 7, 0, 0),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.beer,
+                                      0, 8, 0, 0),
+                                  child: Text(
+                                    'Roupas',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                          fontSize: 14,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                      child: InkWell(
+                        onTap: () async {
+                          setState(() =>
+                              FFAppState().tipoFiltroPesquisa = 'padaria');
+                          setState(
+                              () => FFAppState().mostrarFiltroCategoria = true);
+                          setState(
+                              () => FFAppState().mostrarListaCompleta = false);
+                          setState(
+                              () => FFAppState().mostrarListaPesquisa = false);
+                        },
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.breakfast_dining,
                                     color:
                                         FlutterFlowTheme.of(context).black600,
                                     size: 32,
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                                child: Text(
-                                  'Bares',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .black600,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 8, 0, 0),
+                                  child: Text(
+                                    'Padarias',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                      child: InkWell(
+                        onTap: () async {
+                          setState(
+                              () => FFAppState().tipoFiltroPesquisa = 'bar');
+                          setState(
+                              () => FFAppState().mostrarFiltroCategoria = true);
+                          setState(
+                              () => FFAppState().mostrarListaCompleta = false);
+                          setState(
+                              () => FFAppState().mostrarListaPesquisa = false);
+                        },
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        9, 7, 0, 0),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.beer,
+                                      color:
+                                          FlutterFlowTheme.of(context).black600,
+                                      size: 32,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 8, 0, 0),
+                                  child: Text(
+                                    'Bares',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(8, 0, 12, 0),
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                      child: InkWell(
+                        onTap: () async {
+                          setState(() =>
+                              FFAppState().tipoFiltroPesquisa = 'mercado');
+                          setState(
+                              () => FFAppState().mostrarFiltroCategoria = true);
+                          setState(
+                              () => FFAppState().mostrarListaCompleta = false);
+                          setState(
+                              () => FFAppState().mostrarListaPesquisa = false);
+                        },
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 48,
-                                height: 48,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  shape: BoxShape.circle,
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.shopping_cart,
+                                    color:
+                                        FlutterFlowTheme.of(context).black600,
+                                    size: 32,
+                                  ),
                                 ),
-                                child: Icon(
-                                  Icons.shopping_cart,
-                                  color: FlutterFlowTheme.of(context).black600,
-                                  size: 32,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 8, 0, 0),
+                                  child: Text(
+                                    'Mercadinhos',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                                child: Text(
-                                  'Mercadinhos',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .black600,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -496,151 +551,478 @@ class _TelaPrincipalWidgetState extends State<TelaPrincipalWidget> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
-              child: StreamBuilder<List<LojasRecord>>(
-                stream: queryLojasRecord(
-                  queryBuilder: (lojasRecord) => lojasRecord.where('nomeLoja',
-                      isEqualTo: searchFieldController.text),
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(
-                          color: Colors.black,
-                        ),
-                      ),
-                    );
-                  }
-                  List<LojasRecord> listViewLojasRecordList = snapshot.data;
-                  return ListView.builder(
-                    padding: EdgeInsets.zero,
-                    primary: false,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: listViewLojasRecordList.length,
-                    itemBuilder: (context, listViewIndex) {
-                      final listViewLojasRecord =
-                          listViewLojasRecordList[listViewIndex];
-                      return Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: Image.network(
-                                listViewLojasRecord.fotoLoja,
-                              ).image,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 3,
-                                color: Color(0x33000000),
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
-                            child: Container(
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                  topLeft: Radius.circular(0),
-                                  topRight: Radius.circular(0),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 0, 16, 0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            listViewLojasRecord.nomeLoja,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .dark900,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MenuLojaCompradorPageWidget(),
-                                              ),
-                                            );
-                                          },
-                                          text: 'Conhecer',
-                                          options: FFButtonOptions(
-                                            width: 120,
-                                            height: 40,
-                                            color: FlutterFlowTheme.of(context)
-                                                .dark900,
-                                            textStyle: GoogleFonts.getFont(
-                                              'Lexend Deca',
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                            ),
-                                            elevation: 3,
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1,
-                                            ),
-                                            borderRadius: 8,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+            if (FFAppState().mostrarListaCompleta ?? true)
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
+                child: StreamBuilder<List<LojasRecord>>(
+                  stream: queryLojasRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
                           ),
                         ),
                       );
-                    },
-                  );
-                },
+                    }
+                    List<LojasRecord> listViewLojasRecordList = snapshot.data;
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      primary: false,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewLojasRecordList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewLojasRecord =
+                            listViewLojasRecordList[listViewIndex];
+                        return Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: Image.network(
+                                  listViewLojasRecord.fotoLoja,
+                                ).image,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 3,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(0),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              listViewLojasRecord.nomeLoja,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .dark900,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                  reverseDuration:
+                                                      Duration(milliseconds: 0),
+                                                  child:
+                                                      MenuLojaCompradorPageWidget(
+                                                    itemLoja:
+                                                        listViewLojasRecord,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            text: 'Conhecer',
+                                            options: FFButtonOptions(
+                                              width: 120,
+                                              height: 40,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .dark900,
+                                              textStyle: GoogleFonts.getFont(
+                                                'Lexend Deca',
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                              ),
+                                              elevation: 3,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius: 8,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            if (FFAppState().mostrarListaPesquisa ?? true)
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
+                child: Builder(
+                  builder: (context) {
+                    final nomeDasLojas = simpleSearchResults?.toList() ?? [];
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      primary: false,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: nomeDasLojas.length,
+                      itemBuilder: (context, nomeDasLojasIndex) {
+                        final nomeDasLojasItem =
+                            nomeDasLojas[nomeDasLojasIndex];
+                        return Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: Image.network(
+                                  nomeDasLojasItem.fotoLoja,
+                                ).image,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 3,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(0),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              nomeDasLojasItem.nomeLoja,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .dark900,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                  reverseDuration:
+                                                      Duration(milliseconds: 0),
+                                                  child:
+                                                      MenuLojaCompradorPageWidget(
+                                                    itemLoja: nomeDasLojasItem,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            text: 'Conhecer',
+                                            options: FFButtonOptions(
+                                              width: 120,
+                                              height: 40,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .dark900,
+                                              textStyle: GoogleFonts.getFont(
+                                                'Lexend Deca',
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                              ),
+                                              elevation: 3,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius: 8,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            if (FFAppState().mostrarFiltroCategoria ?? true)
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
+                child: StreamBuilder<List<LojasRecord>>(
+                  stream: queryLojasRecord(
+                    queryBuilder: (lojasRecord) => lojasRecord.where('tipoLoja',
+                        isEqualTo: FFAppState().tipoFiltroPesquisa),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    }
+                    List<LojasRecord> listViewLojasRecordList = snapshot.data;
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      primary: false,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewLojasRecordList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewLojasRecord =
+                            listViewLojasRecordList[listViewIndex];
+                        return Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: Image.network(
+                                  listViewLojasRecord.fotoLoja,
+                                ).image,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 3,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 120, 0, 0),
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(0),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              listViewLojasRecord.nomeLoja,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .dark900,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FFButtonWidget(
+                                            onPressed: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                  reverseDuration:
+                                                      Duration(milliseconds: 0),
+                                                  child:
+                                                      MenuLojaCompradorPageWidget(
+                                                    itemLoja:
+                                                        listViewLojasRecord,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            text: 'Conhecer',
+                                            options: FFButtonOptions(
+                                              width: 120,
+                                              height: 40,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .dark900,
+                                              textStyle: GoogleFonts.getFont(
+                                                'Lexend Deca',
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                              ),
+                                              elevation: 3,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius: 8,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.96,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x3A000000),
+                      offset: Offset(0, 2),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ],

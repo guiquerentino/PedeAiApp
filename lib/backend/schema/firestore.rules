@@ -28,5 +28,26 @@ service cloud.firestore {
       allow write: if true;
       allow delete: if true;
     }
+
+    match /produtos/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /subprodutos/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /pedidos/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
   }
 }

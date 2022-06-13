@@ -20,11 +20,23 @@ class FFAppState {
 
   String emailUsuario = '';
 
-  String senhaUsuario = '';
-
-  String roleUsuario = '';
-
   String tokenCode = '';
+
+  bool mostrarListaCompleta = true;
+
+  bool mostrarFiltroCategoria = false;
+
+  String tipoFiltroPesquisa = '';
+
+  bool mostrarListaPesquisa = false;
+
+  bool mostrarListaCompletaMenuLoja = true;
+
+  String lojaQueEstaNoCarrinho = '';
+
+  String lojaVendedoraCarrinhoNome = '';
+
+  String fotoLojaVendedoraCarrinho;
 }
 
 LatLng _latLngFromString(String val) {

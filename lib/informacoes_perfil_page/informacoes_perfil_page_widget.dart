@@ -30,12 +30,12 @@ class _InformacoesPerfilPageWidgetState
   @override
   void initState() {
     super.initState();
-    cEPFieldController = TextEditingController();
-    cPFFieldController = TextEditingController();
-    nomeFieldController = TextEditingController();
-    telefoneFieldController = TextEditingController();
-    enderecoFieldController = TextEditingController();
-    numeroFieldController = TextEditingController();
+    cEPFieldController = TextEditingController(text: '[User Email]');
+    cPFFieldController = TextEditingController(text: '[User Name]');
+    nomeFieldController = TextEditingController(text: '[User Email]');
+    telefoneFieldController = TextEditingController(text: '[User Email]');
+    enderecoFieldController = TextEditingController(text: '[User Email]');
+    numeroFieldController = TextEditingController(text: '[User Name]');
   }
 
   @override
@@ -122,8 +122,8 @@ class _InformacoesPerfilPageWidgetState
                                       controller: nomeFieldController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Nome',
-                                        hintText: 'Digite seu nome',
+                                        labelText: 'Email Address',
+                                        hintText: 'Enter a new email',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -181,8 +181,8 @@ class _InformacoesPerfilPageWidgetState
                                       controller: cPFFieldController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'CPF',
-                                        hintText: 'Digite seu CPF',
+                                        labelText: 'Your Nam',
+                                        hintText: 'What do people call you...?',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -246,9 +246,8 @@ class _InformacoesPerfilPageWidgetState
                                       controller: telefoneFieldController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Telefone para contato',
-                                        hintText:
-                                            'Digite um telefone para contato',
+                                        labelText: 'Email Address',
+                                        hintText: 'Enter a new email',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -313,8 +312,8 @@ class _InformacoesPerfilPageWidgetState
                                       controller: enderecoFieldController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Endereço',
-                                        hintText: 'Digite seu endereço',
+                                        labelText: 'Email Address',
+                                        hintText: 'Enter a new email',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -373,9 +372,8 @@ class _InformacoesPerfilPageWidgetState
                                       controller: numeroFieldController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Número',
-                                        hintText:
-                                            'Número onde será realizado a entrega',
+                                        labelText: 'Your Nam',
+                                        hintText: 'What do people call you...?',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -433,8 +431,8 @@ class _InformacoesPerfilPageWidgetState
                                       controller: cEPFieldController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'CEP',
-                                        hintText: 'Digite seu CE',
+                                        labelText: 'Email Address',
+                                        hintText: 'Enter a new email',
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -512,9 +510,11 @@ class _InformacoesPerfilPageWidgetState
                             await currentUserReference.update(usersUpdateData);
                             await Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    NavBarPage(initialPage: 'TelaPrincipal'),
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                                reverseDuration: Duration(milliseconds: 0),
+                                child: NavBarPage(initialPage: 'TelaPrincipal'),
                               ),
                             );
                           },
