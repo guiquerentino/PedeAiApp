@@ -31,6 +31,12 @@ abstract class ProdutosRecord
   bool get estaSelecionado;
 
   @nullable
+  String get nomeLojaVendedora;
+
+  @nullable
+  String get fotoLojaVendedora;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -40,7 +46,9 @@ abstract class ProdutosRecord
     ..descricaoProduto = ''
     ..idLoja = ''
     ..fotoProduto = ''
-    ..estaSelecionado = false;
+    ..estaSelecionado = false
+    ..nomeLojaVendedora = ''
+    ..fotoLojaVendedora = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('produtos');
@@ -70,6 +78,8 @@ Map<String, dynamic> createProdutosRecordData({
   String idLoja,
   String fotoProduto,
   bool estaSelecionado,
+  String nomeLojaVendedora,
+  String fotoLojaVendedora,
 }) =>
     serializers.toFirestore(
         ProdutosRecord.serializer,
@@ -79,4 +89,6 @@ Map<String, dynamic> createProdutosRecordData({
           ..descricaoProduto = descricaoProduto
           ..idLoja = idLoja
           ..fotoProduto = fotoProduto
-          ..estaSelecionado = estaSelecionado));
+          ..estaSelecionado = estaSelecionado
+          ..nomeLojaVendedora = nomeLojaVendedora
+          ..fotoLojaVendedora = fotoLojaVendedora));

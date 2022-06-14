@@ -127,26 +127,21 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                               'assets/images/Carrinho_Vazio-removebg-preview.png',
                               width: MediaQuery.of(context).size.width * 0.9,
                               height: MediaQuery.of(context).size.height * 0.5,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         if ((carrinhoSubprodutosRecordList.length) <= 0)
                           Align(
-                            alignment: AlignmentDirectional(0.15, 0),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
-                              child: Text(
-                                'Carrinho Vazio! :(',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color:
-                                          FlutterFlowTheme.of(context).dark900,
-                                      fontSize: 20,
-                                    ),
-                              ),
+                            alignment: AlignmentDirectional(0.15, -0.1),
+                            child: Text(
+                              'Carrinho Vazio! :(',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: FlutterFlowTheme.of(context).dark900,
+                                    fontSize: 20,
+                                  ),
                             ),
                           ),
                         if ((carrinhoSubprodutosRecordList.length) >= 1)
@@ -158,184 +153,251 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                               children: [
                                 if ((carrinhoSubprodutosRecordList.length) >= 1)
                                   Expanded(
-                                    child:
-                                        StreamBuilder<List<SubprodutosRecord>>(
-                                      stream: querySubprodutosRecord(),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: CircularProgressIndicator(
-                                                color: Colors.black,
+                                    child: AuthUserStreamWidget(
+                                      child: StreamBuilder<
+                                          List<SubprodutosRecord>>(
+                                        stream: querySubprodutosRecord(
+                                          queryBuilder: (subprodutosRecord) =>
+                                              subprodutosRecord.where(
+                                                  'idComprador',
+                                                  isEqualTo: valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.idCliente,
+                                                      '')),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: Colors.black,
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        }
-                                        List<SubprodutosRecord>
-                                            listViewSubprodutosRecordList =
-                                            snapshot.data;
-                                        return ListView.builder(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemCount:
-                                              listViewSubprodutosRecordList
-                                                  .length,
-                                          itemBuilder:
-                                              (context, listViewIndex) {
-                                            final listViewSubprodutosRecord =
-                                                listViewSubprodutosRecordList[
-                                                    listViewIndex];
-                                            return StreamBuilder<
-                                                ProdutosRecord>(
-                                              stream:
-                                                  ProdutosRecord.getDocument(
-                                                      listViewSubprodutosRecord
-                                                          .produto),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color: Colors.black,
+                                            );
+                                          }
+                                          List<SubprodutosRecord>
+                                              listViewSubprodutosRecordList =
+                                              snapshot.data;
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount:
+                                                listViewSubprodutosRecordList
+                                                    .length,
+                                            itemBuilder:
+                                                (context, listViewIndex) {
+                                              final listViewSubprodutosRecord =
+                                                  listViewSubprodutosRecordList[
+                                                      listViewIndex];
+                                              return StreamBuilder<
+                                                  ProdutosRecord>(
+                                                stream:
+                                                    ProdutosRecord.getDocument(
+                                                        listViewSubprodutosRecord
+                                                            .produto),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  final productContainerProdutosRecord =
+                                                      snapshot.data;
+                                                  return Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.96,
+                                                    height: 120,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          blurRadius: 4,
+                                                          color:
+                                                              Color(0x3A000000),
+                                                          offset: Offset(0, 2),
+                                                        )
+                                                      ],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      border: Border.all(
+                                                        color: Colors.white,
+                                                        width: 0,
                                                       ),
                                                     ),
-                                                  );
-                                                }
-                                                final productContainerProdutosRecord =
-                                                    snapshot.data;
-                                                return Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.96,
-                                                  height: 120,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 4,
-                                                        color:
-                                                            Color(0x3A000000),
-                                                        offset: Offset(0, 2),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    border: Border.all(
-                                                      color: Colors.white,
-                                                      width: 0,
-                                                    ),
-                                                  ),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Padding(
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8,
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                child: Image
+                                                                    .network(
+                                                                  productContainerProdutosRecord
+                                                                      .fotoProduto,
+                                                                  width: 74,
+                                                                  height: 74,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Expanded(
+                                                          child: Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        8,
+                                                                        12,
                                                                         0,
                                                                         0,
                                                                         0),
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              child:
-                                                                  Image.network(
-                                                                productContainerProdutosRecord
-                                                                    .fotoProduto,
-                                                                width: 74,
-                                                                height: 74,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(12,
-                                                                      0, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                productContainerProdutosRecord
-                                                                    .nomeProduto,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Lexend Deca',
-                                                                      color: Color(
-                                                                          0xFF090F13),
-                                                                      fontSize:
-                                                                          18,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                    ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            8,
-                                                                            16,
-                                                                            0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    if ((listViewSubprodutosRecord
-                                                                            .quantidade) >=
-                                                                        2)
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  productContainerProdutosRecord
+                                                                      .nomeProduto,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Lexend Deca',
+                                                                        color: Color(
+                                                                            0xFF090F13),
+                                                                        fontSize:
+                                                                            18,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                      ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          8,
+                                                                          16,
+                                                                          0),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      if ((listViewSubprodutosRecord
+                                                                              .quantidade) >=
+                                                                          2)
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            final subprodutosUpdateData =
+                                                                                {
+                                                                              ...createSubprodutosRecordData(
+                                                                                subtotal: functions.diminuirSubtotal(listViewSubprodutosRecord.subtotal, productContainerProdutosRecord.precoProduto),
+                                                                              ),
+                                                                              'quantidade': FieldValue.increment(-1),
+                                                                            };
+                                                                            await listViewSubprodutosRecord.reference.update(subprodutosUpdateData);
+                                                                          },
+                                                                          child:
+                                                                              FaIcon(
+                                                                            FontAwesomeIcons.minus,
+                                                                            color:
+                                                                                Colors.black,
+                                                                            size:
+                                                                                20,
+                                                                          ),
+                                                                        ),
+                                                                      if ((listViewSubprodutosRecord
+                                                                              .quantidade) <=
+                                                                          1)
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            await listViewSubprodutosRecord.reference.delete();
+
+                                                                            final produtosUpdateData =
+                                                                                createProdutosRecordData(
+                                                                              estaSelecionado: false,
+                                                                            );
+                                                                            await productContainerProdutosRecord.reference.update(produtosUpdateData);
+                                                                          },
+                                                                          child:
+                                                                              FaIcon(
+                                                                            FontAwesomeIcons.trash,
+                                                                            color:
+                                                                                Colors.black,
+                                                                            size:
+                                                                                20,
+                                                                          ),
+                                                                        ),
+                                                                      Text(
+                                                                        listViewSubprodutosRecord
+                                                                            .quantidade
+                                                                            .toString(),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'Lexend Deca',
+                                                                              fontSize: 20,
+                                                                            ),
+                                                                      ),
                                                                       InkWell(
                                                                         onTap:
                                                                             () async {
                                                                           final subprodutosUpdateData =
                                                                               {
                                                                             ...createSubprodutosRecordData(
-                                                                              subtotal: functions.diminuirSubtotal(listViewSubprodutosRecord.subtotal, productContainerProdutosRecord.precoProduto),
+                                                                              subtotal: functions.somarSubtotal(listViewSubprodutosRecord.subtotal, productContainerProdutosRecord.precoProduto),
                                                                             ),
                                                                             'quantidade':
-                                                                                FieldValue.increment(-1),
+                                                                                FieldValue.increment(1),
                                                                           };
                                                                           await listViewSubprodutosRecord
                                                                               .reference
@@ -344,117 +406,42 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                                         child:
                                                                             FaIcon(
                                                                           FontAwesomeIcons
-                                                                              .minus,
+                                                                              .plus,
                                                                           color:
                                                                               Colors.black,
                                                                           size:
                                                                               20,
                                                                         ),
                                                                       ),
-                                                                    if ((listViewSubprodutosRecord
-                                                                            .quantidade) <=
-                                                                        1)
-                                                                      InkWell(
-                                                                        onTap:
-                                                                            () async {
-                                                                          await listViewSubprodutosRecord
-                                                                              .reference
-                                                                              .delete();
-
-                                                                          final produtosUpdateData =
-                                                                              createProdutosRecordData(
-                                                                            estaSelecionado:
-                                                                                false,
-                                                                          );
-                                                                          await productContainerProdutosRecord
-                                                                              .reference
-                                                                              .update(produtosUpdateData);
-                                                                        },
-                                                                        child:
-                                                                            FaIcon(
-                                                                          FontAwesomeIcons
-                                                                              .trash,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          size:
-                                                                              20,
-                                                                        ),
+                                                                      Text(
+                                                                        functions.retornaValorTotal(
+                                                                            listViewSubprodutosRecord.quantidade,
+                                                                            productContainerProdutosRecord.precoProduto),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle1
+                                                                            .override(
+                                                                              fontFamily: 'Lexend Deca',
+                                                                              color: Color(0xFF090F13),
+                                                                              fontSize: 18,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
                                                                       ),
-                                                                    Text(
-                                                                      listViewSubprodutosRecord
-                                                                          .quantidade
-                                                                          .toString(),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Lexend Deca',
-                                                                            fontSize:
-                                                                                20,
-                                                                          ),
-                                                                    ),
-                                                                    InkWell(
-                                                                      onTap:
-                                                                          () async {
-                                                                        final subprodutosUpdateData =
-                                                                            {
-                                                                          ...createSubprodutosRecordData(
-                                                                            subtotal:
-                                                                                functions.somarSubtotal(listViewSubprodutosRecord.subtotal, productContainerProdutosRecord.precoProduto),
-                                                                          ),
-                                                                          'quantidade':
-                                                                              FieldValue.increment(1),
-                                                                        };
-                                                                        await listViewSubprodutosRecord
-                                                                            .reference
-                                                                            .update(subprodutosUpdateData);
-                                                                      },
-                                                                      child:
-                                                                          FaIcon(
-                                                                        FontAwesomeIcons
-                                                                            .plus,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        size:
-                                                                            20,
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      functions.retornaValorTotal(
-                                                                          listViewSubprodutosRecord
-                                                                              .quantidade,
-                                                                          productContainerProdutosRecord
-                                                                              .precoProduto),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Lexend Deca',
-                                                                            color:
-                                                                                Color(0xFF090F13),
-                                                                            fontSize:
-                                                                                18,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                          ),
-                                                                    ),
-                                                                  ],
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                               ],
@@ -609,6 +596,10 @@ class _CarrinhoWidgetState extends State<CarrinhoWidget> {
                                                           .toList()),
                                               fotoLojaVendedora: FFAppState()
                                                   .fotoLojaVendedoraCarrinho,
+                                              idComprador: valueOrDefault(
+                                                  currentUserDocument
+                                                      ?.idCliente,
+                                                  ''),
                                             ),
                                             'listaProdutosPedido':
                                                 carrinhoSubprodutosRecordList

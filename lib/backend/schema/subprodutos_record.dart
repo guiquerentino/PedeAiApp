@@ -24,7 +24,7 @@ abstract class SubprodutosRecord
   String get lojaVendedora;
 
   @nullable
-  String get fotoLojaVendedora;
+  String get idComprador;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -34,7 +34,7 @@ abstract class SubprodutosRecord
     ..quantidade = 0
     ..subtotal = 0.0
     ..lojaVendedora = ''
-    ..fotoLojaVendedora = '';
+    ..idComprador = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('subprodutos');
@@ -62,7 +62,7 @@ Map<String, dynamic> createSubprodutosRecordData({
   int quantidade,
   double subtotal,
   String lojaVendedora,
-  String fotoLojaVendedora,
+  String idComprador,
 }) =>
     serializers.toFirestore(
         SubprodutosRecord.serializer,
@@ -71,4 +71,4 @@ Map<String, dynamic> createSubprodutosRecordData({
           ..quantidade = quantidade
           ..subtotal = subtotal
           ..lojaVendedora = lojaVendedora
-          ..fotoLojaVendedora = fotoLojaVendedora));
+          ..idComprador = idComprador));

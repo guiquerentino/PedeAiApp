@@ -1,9 +1,9 @@
 import '../auth/auth_util.dart';
 import '../configuracao_aplicativo_page/configuracao_aplicativo_page_widget.dart';
-import '../edicao_conta_page/edicao_conta_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../informacoes_perfil_page/informacoes_perfil_page_widget.dart';
 import '../main.dart';
 import '../tela_de_login/tela_de_login_widget.dart';
 import 'package:flutter/material.dart';
@@ -394,7 +394,7 @@ class _EditarPerfilPageWidgetState extends State<EditarPerfilPageWidget> {
                             type: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
                             reverseDuration: Duration(milliseconds: 0),
-                            child: EdicaoContaPageWidget(),
+                            child: InformacoesPerfilPageWidget(),
                           ),
                         );
                       },

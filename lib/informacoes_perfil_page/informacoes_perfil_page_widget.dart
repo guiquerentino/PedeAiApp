@@ -92,17 +92,11 @@ class _InformacoesPerfilPageWidgetState
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.asset(
-                            'assets/images/man.png',
-                          ),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                          size: 80,
                         ),
                       ),
                       Form(
@@ -520,7 +514,7 @@ class _InformacoesPerfilPageWidgetState
                           },
                           text: 'Salvar Informações',
                           options: FFButtonOptions(
-                            width: 230,
+                            width: 350,
                             height: 50,
                             color: FlutterFlowTheme.of(context).black600,
                             textStyle:
