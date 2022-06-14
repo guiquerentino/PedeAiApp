@@ -285,13 +285,46 @@ class _DetalhesProdutoPageWidgetState extends State<DetalhesProdutoPageWidget> {
                             ),
                           );
                         } else {
+                          if ((detalhesProdutoPageSubprodutosRecordList
+                                  .length) ==
+                              0) {
+                            setState(() => FFAppState().lojaQueEstaNoCarrinho =
+                                widget.detalhesProduto.idLoja);
+                            setState(() =>
+                                FFAppState().lojaVendedoraCarrinhoNome =
+                                    widget.detalhesProduto.idLoja);
+                            setState(() =>
+                                FFAppState().fotoLojaVendedoraCarrinho =
+                                    widget.detalhesProduto.fotoLojaVendedora);
+                          } else {
+                            if ((widget.detalhesProduto.idLoja) !=
+                                (FFAppState().lojaQueEstaNoCarrinho)) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Só é possível adicionar produtos de uma loja por vez!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 2500),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).dark900,
+                                ),
+                              );
+                              return;
+                            }
+                          }
+
                           final subprodutosCreateData =
                               createSubprodutosRecordData(
                             produto: widget.detalhesProduto.reference,
                             quantidade: countControllerValue,
-                            subtotal: functions.somaProdutoEQuantidade(
-                                countControllerValue,
-                                widget.detalhesProduto.precoProduto),
+                            subtotal: widget.detalhesProduto.precoProduto,
+                            lojaVendedora:
+                                widget.detalhesProduto.nomeLojaVendedora,
+                            idComprador: valueOrDefault(
+                                currentUserDocument?.idCliente, ''),
                           );
                           await SubprodutosRecord.collection
                               .doc()
@@ -312,7 +345,7 @@ class _DetalhesProdutoPageWidgetState extends State<DetalhesProdutoPageWidget> {
                                       .tertiaryColor,
                                 ),
                               ),
-                              duration: Duration(milliseconds: 4000),
+                              duration: Duration(milliseconds: 1500),
                               backgroundColor:
                                   FlutterFlowTheme.of(context).dark900,
                             ),

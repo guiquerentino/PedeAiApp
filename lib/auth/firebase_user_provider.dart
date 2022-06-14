@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
 
-class JaChegouFirebaseUser {
-  JaChegouFirebaseUser(this.user);
+class PedeAiFirebaseUser {
+  PedeAiFirebaseUser(this.user);
   User user;
   bool get loggedIn => user != null;
 }
 
-JaChegouFirebaseUser currentUser;
+PedeAiFirebaseUser currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
-Stream<JaChegouFirebaseUser> jaChegouFirebaseUserStream() =>
-    FirebaseAuth.instance
-        .authStateChanges()
-        .debounce((user) => user == null && !loggedIn
-            ? TimerStream(true, const Duration(seconds: 1))
-            : Stream.value(user))
-        .map<JaChegouFirebaseUser>(
-            (user) => currentUser = JaChegouFirebaseUser(user));
+Stream<PedeAiFirebaseUser> pedeAiFirebaseUserStream() => FirebaseAuth.instance
+    .authStateChanges()
+    .debounce((user) => user == null && !loggedIn
+        ? TimerStream(true, const Duration(seconds: 1))
+        : Stream.value(user))
+    .map<PedeAiFirebaseUser>((user) => currentUser = PedeAiFirebaseUser(user));

@@ -476,6 +476,10 @@ class _MenuLojaCompradorPageWidgetState
                                                         .precoProduto,
                                                     lojaVendedora: widget
                                                         .itemLoja.nomeLoja,
+                                                    idComprador: valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.idCliente,
+                                                        ''),
                                                   );
                                                   await SubprodutosRecord
                                                       .collection

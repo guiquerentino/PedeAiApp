@@ -23,6 +23,9 @@ abstract class PedidosRecord
   String get fotoLojaVendedora;
 
   @nullable
+  String get idComprador;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -30,7 +33,8 @@ abstract class PedidosRecord
     ..nomeLojaVendedora = ''
     ..subtotalPedido = 0.0
     ..listaProdutosPedido = ListBuilder()
-    ..fotoLojaVendedora = '';
+    ..fotoLojaVendedora = ''
+    ..idComprador = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('pedidos');
@@ -57,6 +61,7 @@ Map<String, dynamic> createPedidosRecordData({
   String nomeLojaVendedora,
   double subtotalPedido,
   String fotoLojaVendedora,
+  String idComprador,
 }) =>
     serializers.toFirestore(
         PedidosRecord.serializer,
@@ -64,4 +69,5 @@ Map<String, dynamic> createPedidosRecordData({
           ..nomeLojaVendedora = nomeLojaVendedora
           ..subtotalPedido = subtotalPedido
           ..listaProdutosPedido = null
-          ..fotoLojaVendedora = fotoLojaVendedora));
+          ..fotoLojaVendedora = fotoLojaVendedora
+          ..idComprador = idComprador));
